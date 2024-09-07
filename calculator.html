@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Calculator</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #calculator {
+            background-color: #333;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            width: 320px;
+        }
+
+        #display {
+            background-color: #111;
+            color: #0ff;
+            font-size: 32px;
+            padding: 20px;
+            text-align: right;
+            box-shadow: inset 0 -3px 3px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-radius: 20px 20px 0 0;
+        }
+
+        #buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background-color: #444;
+            padding: 20px;
+        }
+
+        button {
+            background-color: #555;
+            border: none;
+            border-radius: 50%;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background-color: #666;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        #equals {
+            grid-column: span 4;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        #equals:hover {
+            background-color: #218838;
+        }
+
+        #clear {
+            grid-column: span 2;
+            background-color: #dc3545;
+            color: #fff;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        #clear:hover {
+            background-color: #c82333;
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="display"></div>
+        <div id="buttons">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>/</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>*</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>-</button>
+            <button>0</button>
+            <button>.</button>
+            <button id="clear">C</button>
+            <button>+</button>
+            <button id="equals">=</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const display = document.getElementById("display");
+            const buttons = document.getElementById("buttons");
+
+            buttons.addEventListener("click", function (event) {
+                if (event.target.tagName === "BUTTON") {
+                    const buttonText = event.target.textContent;
+                    if (buttonText === "=") {
+                        try {
+                            display.textContent = eval(display.textContent) || "";
+                        } catch (error) {
+                            display.textContent = "Error";
+                        }
+                    } else if (buttonText === "C") {
+                        display.textContent = "";
+                    } else {
+                        display.textContent += buttonText;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

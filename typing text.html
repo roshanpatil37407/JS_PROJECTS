@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Test</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #typing-test {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        .test-text {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #333;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div id="typing-test">
+    <h2>Typing Speed Test</h2>
+    <p id="test-text" class="test-text"></p>
+    <input type="text" id="typed-text" placeholder="Start typing here..." />
+    <button onclick="startTest()">Start Test</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const testTextElement = document.getElementById('test-text');
+    const typedTextElement = document.getElementById('typed-text');
+    const resultElement = document.getElementById('result');
+    const texts = [
+        "The quick brown fox jumps over the lazy dog.",
+        "A journey of a thousand miles begins with a single step.",
+        "To be or not to be, that is the question.",
+        "All that glitters is not gold.",
+        "Actions speak louder than words."
+    ];
+    let startTime;
+    let testText = '';
+
+    function getRandomText() {
+        return texts[Math.floor(Math.random() * texts.length)];
+    }
+
+    function startTest() {
+        testText = getRandomText();
+        testTextElement.textContent = testText;
+        typedTextElement.value = '';
+        typedTextElement.focus();
+        resultElement.textContent = '';
+        startTime = new Date();
+    }
+
+    function checkTyping() {
+        const typedText = typedTextElement.value;
+        if (typedText === testText) {
+            const endTime = new Date();
+            const timeTaken = (endTime - startTime) / 1000;
+            const wordsPerMinute = (testText.split(' ').length / timeTaken) * 60;
+            resultElement.textContent = `Congratulations! You typed the text correctly in ${timeTaken.toFixed(2)} seconds. Your typing speed is ${wordsPerMinute.toFixed(2)} words per minute.`;
+        }
+    }
+
+    typedTextElement.addEventListener('input', checkTyping);
+</script>
+
+</body>
+</html>

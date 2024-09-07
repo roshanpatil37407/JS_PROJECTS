@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #expense-tracker {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+        }
+        #expenses {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="expense-tracker">
+    <h2>Expense Tracker</h2>
+    <input type="text" id="expense-desc" placeholder="Expense Description" />
+    <input type="number" id="expense-amount" placeholder="Amount" />
+    <button onclick="addExpense()">Add Expense</button>
+    <ul id="expenses"></ul>
+</div>
+
+<script>
+    function addExpense() {
+        const desc = document.getElementById('expense-desc').value;
+        const amount = document.getElementById('expense-amount').value;
+        const expenseList = document.getElementById('expenses');
+
+        const li = document.createElement('li');
+        li.textContent = `${desc}: $${amount}`;
+        expenseList.appendChild(li);
+    }
+</script>
+
+</body>
+</html>

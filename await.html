@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Jokes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .apis {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #666;
+            min-height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Dad Jokes</h1>
+        <section class="apis">Click the button to get a joke!</section>
+        <button id="btn">Get Another Joke</button>
+    </div>
+
+    <script>
+      const apis = document.querySelector('.apis');
+        const apiUrl = "https://icanhazdadjoke.com/";
+
+        async function fetchJoke (){
+            const res= await fetch(apiUrl,{
+                headers: {
+                    accept: "application/json",
+                },
+            })
+            const data = await res.json();
+            console.log(data.joke);
+            apis.innerHTML = data.joke;
+            
+        }
+
+        fetchJoke();
+
+       
+
+        document.getElementById('btn').addEventListener('click', fetchJoke);
+    </script>
+</body>
+</html>

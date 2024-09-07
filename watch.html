@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level One Watch</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #282c34;
+            color: #61dafb;
+        }
+
+        .maindiv {
+            text-align: center;
+            background-color: #20232a;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .clock {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #61dafb;
+        }
+
+        .clock span {
+            display: inline-block;
+            width: 1.2em;
+        }
+
+        .watch-face {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #20232a;
+            border-radius: 50%;
+            width: 250px;
+            height: 250px;
+            border: 6px solid #61dafb;
+        }
+
+        .watch-face::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #61dafb;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .hour-markers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hour-markers div {
+            position: absolute;
+            width: 6px;
+            height: 20px;
+            background-color: #61dafb;
+        }
+
+      
+
+    </style>
+</head>
+<body>
+    <div class="maindiv watch-face">
+        <div class="hour-markers">
+            
+        </div>
+        <p class="clock" id="clock"></p>
+    </div>
+    <script>
+        const currentTime = () => {
+            let curTime = new Date().toLocaleTimeString();
+            document.getElementById("clock").innerText = curTime;
+        }
+
+        setInterval(currentTime, 1000); 
+    </script>
+</body>
+</html>

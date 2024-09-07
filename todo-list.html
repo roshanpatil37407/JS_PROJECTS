@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #todo-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #new-task {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #add-task-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #add-task-btn:hover {
+            background-color: #218838;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            background-color: #d4edda;
+            color: #555;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-container">
+        <h1>To-Do List</h1>
+        <input type="text" id="new-task" placeholder="Enter new task...">
+        <button id="add-task-btn">Add Task</button>
+        <ul id="task-list"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addTaskButton = document.getElementById('add-task-btn');
+            const taskInput = document.getElementById('new-task');
+            const taskList = document.getElementById('task-list');
+
+            // Add new task
+            addTaskButton.addEventListener('click', () => {
+                const taskText = taskInput.value.trim();
+
+                if (taskText !== '') {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = taskText;
+
+                    // Add mark as complete functionality
+                    listItem.addEventListener('click', () => {
+                        listItem.classList.toggle('completed');
+                    });
+
+                    // Add delete button
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.classList.add('delete-btn');
+                    deleteButton.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent triggering the mark as completed
+                        taskList.removeChild(listItem);
+                    });
+
+                    listItem.appendChild(deleteButton);
+                    taskList.appendChild(listItem);
+
+                    taskInput.value = ''; // Clear input after adding task
+                }
+            });
+
+            // Add task on "Enter" key press
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    addTaskButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

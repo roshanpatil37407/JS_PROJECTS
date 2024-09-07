@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        textarea {
+            width: 80%;
+            height: 45%;
+            margin: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .preview {
+            width: 80%;
+            height: 45%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="markdown" placeholder="Type Markdown here..."></textarea>
+    <div id="preview" class="preview"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+    <script>
+        const markdownInput = document.getElementById('markdown');
+        const preview = document.getElementById('preview');
+        const converter = new showdown.Converter();
+
+        function updatePreview() {
+            const html = converter.makeHtml(markdownInput.value);
+            preview.innerHTML = html;
+        }
+
+        markdownInput.addEventListener('input', updatePreview);
+        updatePreview();
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #quote-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        #quote {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        #author {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #new-quote {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #new-quote:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quote-box">
+        <div id="quote">"Click the button to get a random quote!"</div>
+        <div id="author"></div>
+        <button id="new-quote">New Quote</button>
+    </div>
+
+    <script>
+        const quotes = [
+            { quote: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+            { quote: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
+            { quote: "Get busy living or get busy dying.", author: "Stephen King" },
+            { quote: "You only live once, but if you do it right, once is enough.", author: "Mae West" },
+            { quote: "In the end, we only regret the chances we didn't take.", author: "Lewis Carroll" },
+            { quote: "Success is not the key to happiness. Happiness is the key to success.", author: "Albert Schweitzer" },
+            { quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" }
+        ];
+
+        const quoteText = document.getElementById('quote');
+        const authorText = document.getElementById('author');
+        const newQuoteButton = document.getElementById('new-quote');
+
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
+            quoteText.textContent = `"${randomQuote.quote}"`;
+            authorText.textContent = `- ${randomQuote.author}`;
+        }
+
+        newQuoteButton.addEventListener('click', getRandomQuote);
+    </script>
+
+</body>
+</html>

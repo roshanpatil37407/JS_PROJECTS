@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #music-player {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        progress {
+            width: 100%;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="music-player">
+    <h2>Music Player</h2>
+    <audio id="audio" controls>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <progress id="progress-bar" value="0" max="100"></progress>
+    <div>
+        <button onclick="playMusic()">Play</button>
+        <button onclick="pauseMusic()">Pause</button>
+        <button onclick="stopMusic()">Stop</button>
+    </div>
+</div>
+
+<script>
+    const audio = document.getElementById('audio');
+    const progressBar = document.getElementById('progress-bar');
+
+    function playMusic() {
+        audio.play();
+    }
+
+    function pauseMusic() {
+        audio.pause();
+    }
+
+    function stopMusic() {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+
+    audio.ontimeupdate = () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progress;
+    };
+</script>
+
+</body>
+</html>

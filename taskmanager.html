@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .board {
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+        }
+        .column {
+            width: 24%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+        .column h2 {
+            margin-top: 0;
+        }
+        .task {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: grab;
+        }
+        .task.dragging {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="board">
+        <div class="column" id="todo">
+            <h2>To Do</h2>
+            <div class="task" draggable="true">Task 1</div>
+            <div class="task" draggable="true">Task 2</div>
+        </div>
+        <div class="column" id="in-progress">
+            <h2>In Progress</h2>
+        </div>
+        <div class="column" id="done">
+            <h2>Done</h2>
+        </div>
+    </div>
+
+    <script>
+        const tasks = document.querySelectorAll('.task');
+        const columns = document.querySelectorAll('.column');
+
+        tasks.forEach(task => {
+            task.addEventListener('dragstart', () => {
+                task.classList.add('dragging');
+            });
+
+            task.addEventListener('dragend', () => {
+                task.classList.remove('dragging');
+            });
+        });
+
+        columns.forEach(column => {
+            column.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const draggingTask = document.querySelector('.dragging');
+                column.appendChild(draggingTask);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Event Example</title>
+    <style>
+        #clickable-box {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #000;
+            transition: background-color 0.5s, color 0.5s, transform 0.5s;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        #clickable-box img {
+            width: 100px;
+            height: 100px;
+            transition: opacity 0.5s;
+        }
+
+        #clickable-box.clicked {
+            background-color: #3498db;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        #clickable-box.clicked img {
+            opacity: 0.5;
+        }
+
+        #box-text {
+            font-size: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="clickable-box">
+        <img id="box-image" src="" alt="Image">
+        <p id="box-text">Click me!</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const clickableBox = document.getElementById('clickable-box');
+            const boxImage = document.getElementById('box-image');
+            
+            clickableBox.addEventListener('click', () => {
+                // Toggle 'clicked' class on click
+                clickableBox.classList.toggle('clicked');
+                
+                // Change image source when clicked
+                if (clickableBox.classList.contains('clicked')) {
+                    boxImage.src = 'image2.jpg'; // Replace with the path to your second image
+                } else {
+                    boxImage.src = 'image1.jpg'; // Replace with the path to your original image
+                }
+            });
+        });
+    </script>
+</body>
+</html>

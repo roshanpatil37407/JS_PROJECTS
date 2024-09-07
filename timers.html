@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        section {
+            background-color: #282c34;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        #countDown {
+            font-size: 48px;
+            font-weight: bold;
+            color: #61dafb;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        button {
+    background-color: #1c1c1c;
+    color: #00ffff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+}
+
+button:hover {
+    color: #fff;
+    background-color: #00ffff;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00ffff, 0 0 50px #00ffff;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+}
+
+        .resetvalue {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <p id="countDown">0</p>
+        <div class="btn">
+            <button class="start">Start</button>
+            <button class="reset">Reset</button>
+            <button class="stop">Stop</button>
+            <button class="get">Get Time</button>
+            <button class="clear">Clear Time</button>
+        </div>
+        <div class="resetvalue hidden"></div>
+    </section>
+    <script>
+        const countDown = document.getElementById("countDown");
+        const resetValue = document.querySelector(".resetvalue");
+
+        let startCount = 0;
+        let intervalId;
+
+        const startTimer = () => {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    countDown.innerText = startCount++;
+                }, 1000);
+            }
+        };
+
+        const resetTimer = () => {
+            clearInterval(intervalId);
+            intervalId = null;
+            startCount = 0;
+            countDown.innerText = startCount;
+            resetValue.innerText = `Timer reset at: ${startCount}`;
+            resetValue.classList.remove("hidden");
+        };
+
+        const stopTimer = () => {
+            clearInterval(intervalId);
+            intervalId = null;
+            resetValue.innerText = `Timer stopped at: ${startCount - 1}`;
+            resetValue.classList.remove("hidden");
+        };
+
+        const getTimer = () => {
+            resetValue.innerText = `Current time: ${startCount - 1}`;
+            resetValue.classList.remove("hidden");
+        };
+
+        const clearTimer = () => {
+            resetValue.classList.add("hidden");
+            resetValue.innerText = "";
+        };
+
+        document.querySelector(".start").addEventListener("click", startTimer);
+        document.querySelector(".reset").addEventListener("click", resetTimer);
+        document.querySelector(".stop").addEventListener("click", stopTimer);
+        document.querySelector(".get").addEventListener("click", getTimer);
+        document.querySelector(".clear").addEventListener("click", clearTimer);
+    </script>
+</body>
+</html>
